@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+<extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            adaptable="true"
+            objectClass="org.eclipse.core.resources.IProject"
+            nameFilter="*"
+            id="escalate.sdt.addNature">
+         <action
+               class="escalate.sdt.ui.internal.actions.ToggleNatureAction"
+               enablesFor="+"
+               icon="icons/scalate.png"
+               id="escalate.sdt.addNatureAction"
+               label="Add Scalate Nature"
+               menubarPath="org.eclipse.ui.projectConfigure/additions">
+         </action>
+        <visibility>
+        	<and>
+	        <not>
+	          <objectState name="projectNature" value="escalate.sdt.scalateNature"/>
+	        </not>
+	        <objectClass name="org.eclipse.core.resources.IProject"/>  
+	        </and>
+	      </visibility>
+      </objectContribution>
+      <objectContribution
+            adaptable="true"
+            objectClass="org.eclipse.core.resources.IProject"
+            nameFilter="*"
+            id="escalate.sdt.removeNature">
+         <action
+               label="Remove Scalate Nature"
+               class="escalate.sdt.ui.internal.actions.ToggleNatureAction"
+               menubarPath="scalate.sdt.popupMenu/content"
+               enablesFor="+"
+               id="escalate.sdt.removeNatureAction">
+         </action>
+        <visibility>
+        	<and>
+	          <objectState name="projectNature" value="escalate.sdt.scalateNature"/>
+	          <objectClass name="org.eclipse.core.resources.IProject"/>  
+	        </and>
+	      </visibility>
+      </objectContribution>
+      <objectContribution
+            adaptable="true"
+            id="escalate.sdt.scalateContribution"
+            nameFilter="*"
+            objectClass="org.eclipse.core.resources.IProject">
+         <menu
+               icon="icons/scalate.png"
+               id="scalate.sdt.popupMenu"
+               label="Scalate"
+               path="additions">
+            <groupMarker name="content"/>
+            <separator name="additions"/>
+         </menu>
+        <visibility>
+          <and>
+            <objectState name="projectNature" value="escalate.sdt.scalateNature"/>
+            <objectClass name="org.eclipse.core.resources.IProject"/>
+          </and>
+        </visibility>
+      </objectContribution>
+   </extension>
+
+</plugin>

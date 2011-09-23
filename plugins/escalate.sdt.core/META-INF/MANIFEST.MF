@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: EScalate SDT Core
+Bundle-SymbolicName: escalate.sdt.core; singleton:=true
+Bundle-Version: 0.0.1.qualifier
+Bundle-Vendor: escalate
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.scala-ide.scala.library,
+ org.eclipse.core.resources,
+ org.eclipse.core.runtime,
+ escalate.commons.core;bundle-version="0.0.1"
+Bundle-ActivationPolicy: lazy
+Bundle-Activator: escalate.sdt.core.EScalateCore
+Export-Package: escalate.sdt.core

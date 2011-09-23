@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: EScalate Commons Core
+Bundle-SymbolicName: escalate.commons.core
+Bundle-Version: 0.0.1.qualifier
+Bundle-Vendor: escalate
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.scala-ide.scala.library,
+ org.eclipse.core.resources,
+ org.eclipse.core.runtime
+Export-Package: escalate.resources,
+ escalate.runtime

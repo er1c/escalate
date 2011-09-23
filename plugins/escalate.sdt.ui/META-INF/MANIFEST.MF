@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: EScalate SDT UI
+Bundle-SymbolicName: escalate.sdt.ui; singleton:=true
+Bundle-Version: 0.0.1.qualifier
+Bundle-Vendor: escalate
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.scala-ide.scala.library,
+ org.eclipse.core.runtime,
+ org.eclipse.core.resources,
+ org.eclipse.ui,
+ escalate.commons.core;bundle-version="0.0.1",
+ escalate.sdt.core;bundle-version="0.0.1"

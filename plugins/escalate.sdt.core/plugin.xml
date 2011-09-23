@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         id="escalate.sdt.scalateNature"
+         name="Scalate Project Nature"
+         point="org.eclipse.core.resources.natures">
+      <runtime>
+         <run
+               class="escalate.sdt.core.internal.ScalateNature">
+         </run>
+      </runtime>
+   </extension>
+</plugin>

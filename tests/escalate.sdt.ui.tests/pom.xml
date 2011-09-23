@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+  xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <artifactId>escalate-sdt</artifactId>
+    <groupId>escalate</groupId>
+    <version>0.0.1-SNAPSHOT</version>
+    <relativePath>../../poms/escalate-sdt/pom.xml</relativePath>
+  </parent>
+  <artifactId>escalate.sdt.ui.tests</artifactId>
+  <name>EScalate SDT UI Tests</name>
+  <packaging>eclipse-test-plugin</packaging>
+  <build>
+    <sourceDirectory>${basedir}/src</sourceDirectory>
+    <plugins>
+      <plugin>
+        <groupId>org.scala-tools</groupId>
+        <artifactId>maven-scala-plugin</artifactId>
+        <executions>
+          <!-- compile Scala before Java sources -->
+          <execution>
+            <phase>process-resources</phase>
+            <goals>
+              <goal>compile</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <jvmArgs>
+            <jvmArg>-Xms512m</jvmArg>
+            <jvmArg>-Xmx1024m</jvmArg>
+          </jvmArgs>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.scalariform</groupId>
+        <artifactId>scalariform-maven-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.eclipse.tycho</groupId>
+        <artifactId>tycho-surefire-plugin</artifactId>
+        <version>${tycho.version}</version>
+        <configuration>
+          <useUIHarness>true</useUIHarness>
+          <useUIThread>true</useUIThread>
+          <testSuite>${project.artifactId}</testSuite>
+          <testClass>escalate.sdt.ui.TestSuite</testClass>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
