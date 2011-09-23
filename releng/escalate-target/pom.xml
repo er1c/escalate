@@ -6,7 +6,7 @@
     <artifactId>escalate</artifactId>
     <groupId>escalate</groupId>
     <version>0.0.1-SNAPSHOT</version>
-    <relativePath>../../escalate/pom.xml</relativePath>
+    <relativePath>../../poms/escalate/pom.xml</relativePath>
   </parent>
   <artifactId>escalate-target</artifactId>
   <packaging>pom</packaging>
