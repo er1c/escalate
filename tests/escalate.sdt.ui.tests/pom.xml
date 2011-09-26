@@ -11,6 +11,13 @@
   <artifactId>escalate.sdt.ui.tests</artifactId>
   <name>EScalate SDT UI Tests</name>
   <packaging>eclipse-test-plugin</packaging>
+  <dependencies>
+    <dependency>
+      <groupId>escalate</groupId>
+      <artifactId>escalate.org.scalatest</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+  </dependencies>
   <build>
     <sourceDirectory>${basedir}/src</sourceDirectory>
     <plugins>
