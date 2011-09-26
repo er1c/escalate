@@ -3,9 +3,10 @@ package escalate.sdt.ui;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
-import escalate.sdt.ui.internal.actions.ToggleNatureActionTest;
+import escalate.sdt.ui.internal.actions.ToggleNatureActionSpec;
+import escalate.sdt.ui.internal.wizards.NewScalateProjectWizardSpec;
 
 @RunWith(Suite.class)
-@Suite.SuiteClasses({ ToggleNatureActionTest.class })
+@Suite.SuiteClasses({ ToggleNatureActionSpec.class, NewScalateProjectWizardSpec.class })
 class TestSuite {
 }
