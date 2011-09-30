@@ -3,6 +3,18 @@
 <plugin>
 
 <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            name="SSP Editor"
+            extensions="ssp"
+            icon="icons/scalate.png"
+            contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
+            class="escalate.sdt.ui.internal.editors.SspEditor"
+            id="escalate.sdt.sspEditor">
+      </editor>
+</extension>
+
+<extension
          point="org.eclipse.ui.popupMenus">
       <objectContribution
             adaptable="true"
