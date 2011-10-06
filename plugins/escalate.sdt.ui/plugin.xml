@@ -77,6 +77,33 @@
           </and>
         </visibility>
       </objectContribution>
-   </extension>
+</extension>
+   
+<extension
+      point="org.eclipse.ui.preferencePages">
+   <page
+         class="escalate.sdt.ui.internal.preferences.ScalatePreferencePage"
+         id="escalate.sdt.scalatePreferencePage"
+         name="Scalate">
+   </page>
+   <page
+         class="escalate.sdt.ui.internal.preferences.SspPreferencePage"
+         id="escalate.sdt.sspPreferencePage"
+         name="SSP"
+         category="escalate.sdt.scalatePreferencePage">
+   </page>
+   <page
+         class="escalate.sdt.ui.internal.preferences.SspSyntaxColoringPreferencePage"
+         id="escalate.sdt.sspSyntaxColoringPreferencePage"
+         name="Syntax Coloring"
+         category="escalate.sdt.sspPreferencePage">
+   </page>
+</extension>
+<extension
+      point="org.eclipse.core.runtime.preferences">
+   <initializer
+         class="escalate.sdt.ui.internal.preferences.ColorPreferenceInitializer">
+   </initializer>
+</extension>
 
 </plugin>

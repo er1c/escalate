@@ -2,7 +2,7 @@ package escalate.sdt
 package ui
 package internal.editors
 
-import org.eclipse.jface.text.rules.{Token, IToken, IRule, ICharacterScanner}
+import org.eclipse.jface.text.rules._
 
 object Rules extends ScannerSupport {
 

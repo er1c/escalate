@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: EScalate Commons UI
+Bundle-SymbolicName: escalate.commons.ui
+Bundle-Version: 0.0.1.qualifier
+Bundle-Vendor: escalate
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.scala-ide.scala.library,
+ org.eclipse.swt,
+ org.eclipse.jface,
+ org.eclipse.ui.forms,
+ org.eclipse.jface.text
+Export-Package: escalate.jface,
+ escalate.swt

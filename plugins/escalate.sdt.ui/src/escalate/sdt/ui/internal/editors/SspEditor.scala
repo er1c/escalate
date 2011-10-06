@@ -2,16 +2,22 @@ package escalate.sdt
 package ui
 package internal.editors
 
+import internal.preferences.SspSyntaxClasses
+import escalate.swt.ColorManager
+
 import org.eclipse.core.runtime.IProgressMonitor
+import org.eclipse.jface.preference.IPreferenceStore
 import org.eclipse.jface.text.contentassist.{ IContentAssistProcessor, ContentAssistant }
 import org.eclipse.jface.text.presentation.PresentationReconciler
 import org.eclipse.jface.text.reconciler.{ MonoReconciler, IReconcilingStrategyExtension, IReconcilingStrategy, DirtyRegion }
-import org.eclipse.jface.text.rules.{ Token, SingleLineRule, RuleBasedScanner, RuleBasedPartitionScanner, MultiLineRule, IRule, ICharacterScanner, FastPartitioner, DefaultDamagerRepairer }
+import org.eclipse.jface.text.rules.{ ITokenScanner, Token, SingleLineRule, RuleBasedScanner, RuleBasedPartitionScanner, MultiLineRule, IRule, ICharacterScanner, FastPartitioner, DefaultDamagerRepairer }
 import org.eclipse.jface.text.source.{ SourceViewerConfiguration, ISourceViewer }
-import org.eclipse.jface.text.{ TextAttribute, ITextViewer, IRegion, IDocument }
+import org.eclipse.jface.text.{ ITextViewer, IRegion, IDocument }
+import org.eclipse.jface.util.PropertyChangeEvent
 import org.eclipse.swt.graphics.{ RGB, Color }
 import org.eclipse.swt.widgets.Display
 import org.eclipse.ui.editors.text.{ TextEditor, FileDocumentProvider }
+import org.eclipse.ui.texteditor.ITextEditor
 
 /**
  * Text editor for Scalate SSP templates supporting syntax coloring.
@@ -19,24 +25,10 @@ import org.eclipse.ui.editors.text.{ TextEditor, FileDocumentProvider }
 class SspEditor extends TextEditor {
   import SspEditor._
 
+  private lazy val configuration = new Configuration(EScalateUi.plugin.getPreferenceStore, this)
+
   setSourceViewerConfiguration(configuration)
   setDocumentProvider(documentProvider)
-
-  private object configuration extends SourceViewerConfiguration {
-    override def getPresentationReconciler(sourceViewer: ISourceViewer) = SspPresentationReconciler()
-    override def getReconciler(sourceViewer: ISourceViewer) = new MonoReconciler(reconciler, false)
-
-    override def getConfiguredContentTypes(sourceViewer: ISourceViewer) =
-      (IDocument.DEFAULT_CONTENT_TYPE :: ContentTypes.All).toArray
-
-    override def getContentAssistant(sv: ISourceViewer) = {
-      val ca = new ContentAssistant
-      val pr = new DefaultCompletionProcessor
-      ca.setContentAssistProcessor(pr, IDocument.DEFAULT_CONTENT_TYPE)
-      ca.setInformationControlCreator(getInformationControlCreator(sv))
-      ca
-    }
-  }
 
   private object documentProvider extends FileDocumentProvider {
     override def createDocument(element: Any) = {
@@ -49,65 +41,98 @@ class SspEditor extends TextEditor {
       doc
     }
   }
+}
 
-  private object reconciler extends IReconcilingStrategyExtension with IReconcilingStrategy {
+object SspEditor {
+
+  /**
+   * Content types for the partitions in a document.
+   */
+  object ContentTypes {
+    val Comment = "__ssp_comment"
+    val Variable = "__ssp_variable"
+    val Directive = "__ssp_directive"
+    val Code = "__ssp_code"
+    val VeloCode = "__ssp_velo_code"
+    val Expression = "__ssp_expression"
+    val DollarExpresssion = "__ssp_dollar_expression"
+
+    val All = List(Comment, Variable, Directive, Code, VeloCode, Expression, DollarExpresssion)
+  }
+
+  class Reconciler extends IReconcilingStrategyExtension with IReconcilingStrategy {
     def setProgressMonitor(monitor: IProgressMonitor) = {}
     def setDocument(doc: IDocument) = {}
     def reconcile(dirtyRegion: DirtyRegion, subRegion: IRegion) = {}
     def reconcile(partition: IRegion) = {}
     def initialReconcile() = {}
   }
-}
 
-object SspEditor {
-
-  object Colors {
-    val LimeGreen = fromRGB((50, 205, 50))
-    val Gray = fromRGB((190, 190, 190))
-
-    def fromRGB(rgb: (Int, Int, Int)): Color = fromRGB(new RGB(rgb._1, rgb._2, rgb._3))
-    def fromRGB(rgb: RGB): Color = new Color(Display.getCurrent, rgb)
+  case class DefaultScalateScanner(
+      colorManager: ColorManager,
+      preferenceStore: IPreferenceStore,
+      syntaxClass: ScalateSyntaxClass) extends RuleBasedScanner with ScalateScanner {
+    setDefaultReturnToken(getToken(syntaxClass))
   }
 
-  /**
-   * Content types for the partitions in a document.
-   */
-  object ContentTypes {
-    val Comment = "__comment"
-    val Variable = "__variable"
-    val Directive = "__directive"
-    val Code = "__code"
-    val VeloCode = "__velo_code"
-    val Expresssion = "__expression"
-    val DollarExpresssion = "__dollar_expression"
+  class Configuration(store: IPreferenceStore, editor: ITextEditor) extends SourceViewerConfiguration {
+    import SspSyntaxClasses._
 
-    val All = List(Comment, Variable, Directive, Code, VeloCode, Expresssion, DollarExpresssion)
-  }
-  
-  object SspPresentationReconciler {
+    private val colorManager = new ColorManager // TODO move to plugin
+    
+    private def scanner(syntaxClass: ScalateSyntaxClass) = new DefaultScalateScanner(colorManager, store, syntaxClass)
 
-    def damagerRepairer(reconciler: PresentationReconciler,
-      token: String, color: Color,
-      scanner: RuleBasedScanner = new RuleBasedScanner) = {
-      scanner.setDefaultReturnToken(new Token(new TextAttribute(color)))
-      val dr = new DefaultDamagerRepairer(scanner)
-      reconciler.setDamager(dr, token)
-      reconciler.setRepairer(dr, token)
+    val commentScanner = scanner(Comment)
+    val variableScanner = scanner(Variable)
+    val directiveScanner = scanner(Directive)
+    val codeScanner = scanner(Code)
+    val expressionScanner = scanner(Expression)
+    val dollarExpressionScanner = scanner(DollarExpresssion)
+    val veloCodeScanner = scanner(VeloCode)
+    val contentScanner = new DefaultContentScanner(colorManager, store)
+
+    override def getPresentationReconciler(sourceViewer: ISourceViewer) = {
+      val reconciler = new PresentationReconciler
+      damagerRepairer(reconciler, contentScanner, IDocument.DEFAULT_CONTENT_TYPE)
+      damagerRepairer(reconciler, commentScanner, ContentTypes.Comment)
+      damagerRepairer(reconciler, variableScanner, ContentTypes.Variable)
+      damagerRepairer(reconciler, directiveScanner, ContentTypes.Directive)
+      damagerRepairer(reconciler, expressionScanner, ContentTypes.Expression)
+      damagerRepairer(reconciler, codeScanner, ContentTypes.Code)
+      damagerRepairer(reconciler, dollarExpressionScanner, ContentTypes.DollarExpresssion)
+      damagerRepairer(reconciler, veloCodeScanner, ContentTypes.VeloCode)
+      reconciler
     }
 
-    def apply() = {
-      val reconciler = new PresentationReconciler
-      damagerRepairer(reconciler, token = IDocument.DEFAULT_CONTENT_TYPE,
-        color = new Color(Display.getCurrent, new RGB(0, 0, 0)),
-        scanner = new DefaultContentScanner)
-      damagerRepairer(reconciler, token = ContentTypes.Comment, color = Colors.Gray)
-      damagerRepairer(reconciler, token = ContentTypes.Variable, color = Colors.LimeGreen)
-      damagerRepairer(reconciler, token = ContentTypes.Directive, color = Colors.LimeGreen)
-      damagerRepairer(reconciler, token = ContentTypes.Expresssion, color = Colors.LimeGreen)
-      damagerRepairer(reconciler, token = ContentTypes.Code, color = Colors.LimeGreen)
-      damagerRepairer(reconciler, token = ContentTypes.DollarExpresssion, color = Colors.LimeGreen)
-      damagerRepairer(reconciler, token = ContentTypes.VeloCode, color = Colors.LimeGreen)
-      reconciler
+    def damagerRepairer(reconciler: PresentationReconciler,
+      scanner: RuleBasedScanner, contentType: String) = {
+      val dr = new DefaultDamagerRepairer(scanner)
+      reconciler.setDamager(dr, contentType)
+      reconciler.setRepairer(dr, contentType)
+    }
+
+    override def getReconciler(sourceViewer: ISourceViewer) = new MonoReconciler(new Reconciler, false)
+
+    override def getConfiguredContentTypes(sourceViewer: ISourceViewer) =
+      (IDocument.DEFAULT_CONTENT_TYPE :: ContentTypes.All).toArray
+
+    override def getContentAssistant(sv: ISourceViewer) = {
+      val ca = new ContentAssistant
+      val pr = new DefaultCompletionProcessor
+      ca.setContentAssistProcessor(pr, IDocument.DEFAULT_CONTENT_TYPE)
+      ca.setInformationControlCreator(getInformationControlCreator(sv))
+      ca
+    }
+
+    def handlePropertyChangeEvent(event: PropertyChangeEvent) {
+      codeScanner.adaptToPreferenceChange(event)
+      variableScanner.adaptToPreferenceChange(event)
+      directiveScanner.adaptToPreferenceChange(event)
+      commentScanner.adaptToPreferenceChange(event)
+      dollarExpressionScanner.adaptToPreferenceChange(event)
+      expressionScanner.adaptToPreferenceChange(event)
+      veloCodeScanner.adaptToPreferenceChange(event)
+      contentScanner.adaptToPreferenceChange(event)
     }
   }
 
@@ -118,12 +143,12 @@ object SspEditor {
     setPredicateRules(Array(
       new MultiLineRule("<%--", "--%>", new Token(ContentTypes.Comment)),
       new MultiLineRule("<%@", "%>", new Token(ContentTypes.Variable)),
-      new MultiLineRule("<%=", "%>", new Token(ContentTypes.Expresssion)),
+      new MultiLineRule("<%=", "%>", new Token(ContentTypes.Expression)),
       new MultiLineRule("<%", "%>", new Token(ContentTypes.Code)),
       new MultiLineRule("${", "}", new Token(ContentTypes.DollarExpresssion)),
       new MultiLineRule("#{", "}#", new Token(ContentTypes.VeloCode)),
       new DirectiveRule("if"),
-      new DirectiveRule("elseif"),
+      new DirectiveRule("elseif"), // FIXME not recognized
       new DirectiveRule("for"),
       new DirectiveRule("import"),
       new DirectiveRule("match"),
@@ -136,10 +161,9 @@ object SspEditor {
   class DirectiveRule(name: String)
     extends SingleLineRule("#" + name + "(", ")", new Token(ContentTypes.Directive))
 
-  class DefaultContentScanner extends RuleBasedScanner {
+  class DefaultContentScanner(val colorManager: ColorManager, val preferenceStore: IPreferenceStore) extends RuleBasedScanner with ScalateScanner {
     setRules(Array(
-      new Rules.SimpleStartRule('#', List("end", "else", "otherwise"),
-        new Token(new TextAttribute(Colors.LimeGreen)))))
+      new Rules.SimpleStartRule('#', List("end", "else", "otherwise"), getToken(SspSyntaxClasses.Directive))))
   }
 
   /**

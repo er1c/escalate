@@ -3,28 +3,27 @@
   xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <artifactId>escalate</artifactId>
+    <artifactId>escalate-commons</artifactId>
     <groupId>escalate</groupId>
     <version>0.0.1-SNAPSHOT</version>
-    <relativePath>../escalate/pom.xml</relativePath>
+    <relativePath>../../poms/escalate-commons/pom.xml</relativePath>
   </parent>
-  <artifactId>escalate-commons</artifactId>
-  <packaging>pom</packaging>
-  <name>EScalate Commons</name>
-  <modules>
-    <module>../../plugins/escalate.commons.core</module>
-    <module>../../plugins/escalate.commons.ui</module>
-  </modules>
+  <artifactId>escalate.commons.ui</artifactId>
+  <name>EScalate Commons UI Plug-in</name>
+  <packaging>eclipse-plugin</packaging>
   <build>
     <plugins>
       <plugin>
-        <groupId>org.eclipse.tycho</groupId>
-        <artifactId>target-platform-configuration</artifactId>
+        <groupId>org.scala-tools</groupId>
+        <artifactId>maven-scala-plugin</artifactId>
       </plugin>
       <plugin>
         <groupId>org.eclipse.tycho</groupId>
-        <artifactId>tycho-maven-plugin</artifactId>
-        <extensions>true</extensions>
+        <artifactId>maven-osgi-compiler-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.scalariform</groupId>
+        <artifactId>scalariform-maven-plugin</artifactId>
       </plugin>
     </plugins>
   </build>
