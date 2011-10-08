@@ -1,9 +1,7 @@
 package escalate
 package sdt
 
-import resources.ResourcesImplicits
-import runtime.PluginPackage
-
-package object ui extends PluginPackage with ResourcesImplicits {
-  val meta = EScalateUi
+package object ui extends runtime.PluginPackage with resources.ResourcesImplicits {
+  type PluginType = UiPlugin
+  def id = "escalate.sdt.ui"
 }

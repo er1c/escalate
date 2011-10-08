@@ -24,7 +24,7 @@ import org.eclipse.ui.{IWorkbenchPreferencePage, IWorkbench}
 class SspSyntaxColoringPreferencePage extends PreferencePage with IWorkbenchPreferencePage {
   import SyntaxColoringPreferencePage._
 
-  setPreferenceStore(EScalateUi.plugin.getPreferenceStore)
+  setPreferenceStore(Plugin.getPreferenceStore)
   private val overlayStore = makeOverlayPreferenceStore
 
   private var colorEditorLabel: Label = _
@@ -70,7 +70,7 @@ class SspSyntaxColoringPreferencePage extends PreferencePage with IWorkbenchPref
   override def performOk() = {
     super.performOk()
     overlayStore.propagate
-    EScalateUi.plugin.savePluginPreferences
+    Plugin.savePluginPreferences
     true
   }
 

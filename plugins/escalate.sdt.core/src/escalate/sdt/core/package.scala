@@ -1,8 +1,9 @@
 package escalate
 package sdt
 
-import escalate.runtime.PluginPackage
+package object core extends runtime.PluginPackage {
+  type PluginType = CorePlugin
+  val id = "escalate.sdt.core"
 
-package object core extends PluginPackage {
-  val meta = EScalateCore
+  val NatureId = core.internal.ScalateNature.Id
 }

@@ -4,7 +4,7 @@ package ui
 package internal
 package actions
 
-import core.EScalateCore
+import testutils.ContextMenuHelper
 import org.scalatest.junit.JUnitSuite
 import org.scalatest.WordSpec
 import org.scalatest.BeforeAndAfterEach
@@ -14,7 +14,6 @@ import org.eclipse.core.resources.ResourcesPlugin
 import org.eclipse.core.resources.IProject
 import org.eclipse.core.runtime.NullProgressMonitor
 import org.scalatest.matchers.MustMatchers
-import escalate.sdt.ui.testutils.ContextMenuHelper
 import org.scalatest.junit.JUnitRunner
 import org.junit.runner.RunWith
 
@@ -50,7 +49,7 @@ class ToggleNatureActionSpec extends WordSpec
 
   def addNature() = {
     val description = project.getDescription
-    description.setNatureIds((EScalateCore.NatureId :: description.getNatureIds.toList).toArray)
+    description.setNatureIds((core.NatureId :: description.getNatureIds.toList).toArray)
     project.setDescription(description, new NullProgressMonitor)
   }
 
@@ -61,7 +60,7 @@ class ToggleNatureActionSpec extends WordSpec
       val tree = viewBot.tree()
       val item = tree.getTreeItem("TestProject").select()
       ContextMenuHelper.clickContextMenu(tree, "Configure", "Add Scalate Nature")
-      project.hasNature(EScalateCore.NatureId) must be === true
+      project.hasNature(core.NatureId) must be === true
     }
 
     "remove the Scalate nature" in {
@@ -70,7 +69,7 @@ class ToggleNatureActionSpec extends WordSpec
       val tree = viewBot.tree()
       val item = tree.getTreeItem("TestProject").select()
       ContextMenuHelper.clickContextMenu(tree, "Scalate", "Remove Scalate Nature")
-      project.hasNature(EScalateCore.NatureId) must be === false
+      project.hasNature(core.NatureId) must be === false
     }
   }
 

@@ -6,7 +6,6 @@ package actions
 
 import collection.JavaConversions._
 
-import core.EScalateCore
 import resources.Resources._
 import runtime.Adapters._
 
@@ -22,7 +21,7 @@ import org.eclipse.ui.{ IObjectActionDelegate, IWorkbenchPart }
 class ToggleNatureAction extends IObjectActionDelegate {
   private var selection: ISelection = _
 
-  def run(action: IAction) = projects foreach (_.toggleNature(EScalateCore.NatureId))
+  def run(action: IAction) = projects foreach (_.toggleNature(core.NatureId))
 
   protected def projects: List[IProject] = selection match {
     case s: IStructuredSelection ⇒ s.toList.toList collect {

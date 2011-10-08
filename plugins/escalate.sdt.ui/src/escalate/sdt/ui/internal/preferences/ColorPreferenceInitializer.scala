@@ -22,7 +22,7 @@ class ColorPreferenceInitializer extends AbstractPreferenceInitializer {
   import ColorPreferenceInitializer._
 
   def initializeDefaultPreferences() {
-    val preferenceStore = EScalateUi.plugin.getPreferenceStore
+    val preferenceStore = Plugin.getPreferenceStore
 
       def initialize(syntaxClass: ScalateSyntaxClass, rgb: RGB, bold: Boolean = false, italic: Boolean = false,
         strikethrough: Boolean = false, underline: Boolean = false) =

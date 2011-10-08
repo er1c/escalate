@@ -7,7 +7,7 @@ import org.osgi.framework.BundleContext
 object Activator {
   trait Meta extends ActivatorMeta {
     private[Activator] var instance: Plugin = _
-    def plugin = instance.asInstanceOf[PluginType]
+    def plugin: PluginType = instance.asInstanceOf[PluginType]
     def id: String
   }
 }

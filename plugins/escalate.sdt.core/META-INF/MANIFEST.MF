@@ -10,5 +10,5 @@ Require-Bundle: org.scala-ide.scala.library,
  org.eclipse.core.runtime,
  escalate.commons.core;bundle-version="0.0.1"
 Bundle-ActivationPolicy: lazy
-Bundle-Activator: escalate.sdt.core.EScalateCore
+Bundle-Activator: escalate.sdt.core.CorePlugin
 Export-Package: escalate.sdt.core

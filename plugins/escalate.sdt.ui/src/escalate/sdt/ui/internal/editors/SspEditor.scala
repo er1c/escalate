@@ -25,7 +25,7 @@ import org.eclipse.ui.texteditor.ITextEditor
 class SspEditor extends TextEditor {
   import SspEditor._
 
-  private lazy val configuration = new Configuration(EScalateUi.plugin.getPreferenceStore, this)
+  private lazy val configuration = new Configuration(Plugin.getPreferenceStore, this)
 
   setSourceViewerConfiguration(configuration)
   setDocumentProvider(documentProvider)
