@@ -79,7 +79,7 @@ object SspEditor {
     import SspSyntaxClasses._
 
     private val colorManager = new ColorManager // TODO move to plugin
-    
+
     private def scanner(syntaxClass: ScalateSyntaxClass) = new DefaultScalateScanner(colorManager, store, syntaxClass)
 
     val commentScanner = scanner(Comment)

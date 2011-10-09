@@ -12,7 +12,7 @@ trait ScalateScanner extends ITokenScanner {
 
   protected def colorManager: ColorManager
   protected def preferenceStore: IPreferenceStore
-  
+
   private var tokens: Map[ScalateSyntaxClass, Token] = Map()
 
   protected def getToken(syntaxClass: ScalateSyntaxClass): Token =

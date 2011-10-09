@@ -2,24 +2,23 @@ package escalate.sdt
 package ui
 package internal.preferences
 
-
 import escalate.jface.OverlayPreferenceStore
 import OverlayPreferenceStore._
-import escalate.swt.{SwtUtils, ScrolledPageContent}
+import escalate.swt.{ SwtUtils, ScrolledPageContent }
 import SwtUtils._
 import internal.editors.ScalateSyntaxClass
 
 import PartialFunction.condOpt
 
 import org.eclipse.jface.layout.PixelConverter
-import org.eclipse.jface.preference.{PreferencePage, PreferenceConverter, ColorSelector}
-import org.eclipse.jface.viewers.{Viewer, TreeViewer, StructuredSelection, LabelProvider, ITreeContentProvider, IStructuredSelection, DoubleClickEvent}
+import org.eclipse.jface.preference.{ PreferencePage, PreferenceConverter, ColorSelector }
+import org.eclipse.jface.viewers.{ Viewer, TreeViewer, StructuredSelection, LabelProvider, ITreeContentProvider, IStructuredSelection, DoubleClickEvent }
 import org.eclipse.swt.events.SelectionEvent
-import org.eclipse.swt.layout.{GridLayout, GridData}
-import org.eclipse.swt.widgets.{Scrollable, Link, Label, Control, Composite, Button}
+import org.eclipse.swt.layout.{ GridLayout, GridData }
+import org.eclipse.swt.widgets.{ Scrollable, Link, Label, Control, Composite, Button }
 import org.eclipse.swt.SWT
 import org.eclipse.ui.dialogs.PreferencesUtil
-import org.eclipse.ui.{IWorkbenchPreferencePage, IWorkbench}
+import org.eclipse.ui.{ IWorkbenchPreferencePage, IWorkbench }
 
 class SspSyntaxColoringPreferencePage extends PreferencePage with IWorkbenchPreferencePage {
   import SyntaxColoringPreferencePage._
