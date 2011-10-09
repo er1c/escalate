@@ -10,9 +10,10 @@
     <maven>3.0</maven>
   </prerequisites>
   <modules>
+    <module>../../releng/escalate-target</module>
     <module>../escalate-commons</module>
     <module>../escalate-sdt</module>
-    <module>../../releng/escalate-target</module>
+    <module>../../releng/escalate-repo</module>
   </modules>
   <name>EScalate</name>
   <url>http://github.com/sdb/escalate</url>

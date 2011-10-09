@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/escalate.commons_0.0.1.qualifier.jar" id="escalate.commons" version="0.0.1.qualifier">
+      <category name="escalate.commons"/>
+   </feature>
+   <feature url="features/escalate.sdt_0.0.1.qualifier.jar" id="escalate.sdt" version="0.0.1.qualifier">
+      <category name="escalate.sdt"/>
+   </feature>
+   <category-def name="escalate.commons" label="EScalate Commons"/>
+   <category-def name="escalate.sdt" label="EScalate SDT"/>
+</site>

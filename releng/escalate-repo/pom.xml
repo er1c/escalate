@@ -6,19 +6,21 @@
     <artifactId>escalate</artifactId>
     <groupId>escalate</groupId>
     <version>0.0.1-SNAPSHOT</version>
-    <relativePath>../escalate/pom.xml</relativePath>
+    <relativePath>../../poms/escalate/pom.xml</relativePath>
   </parent>
-  <artifactId>escalate-sdt</artifactId>
-  <packaging>pom</packaging>
-  <name>EScalate SDT</name>
-  <modules>
-    <module>../../plugins/escalate.sdt.core</module>
-    <module>../../plugins/escalate.sdt.ui</module>
-    <module>../../tests/escalate.sdt.ui.tests</module>
-    <module>../../features/escalate.sdt</module>
-  </modules>
+  <artifactId>escalate-repo</artifactId>
+  <name>EScalate Repository</name>
+  <packaging>eclipse-repository</packaging>
   <build>
     <plugins>
+      <plugin>
+        <groupId>org.eclipse.tycho</groupId>
+        <artifactId>tycho-p2-publisher-plugin</artifactId>
+        <version>${tycho.version}</version>
+        <configuration>
+          <publishArtifacts>true</publishArtifacts>
+        </configuration>
+      </plugin>
       <plugin>
         <groupId>org.eclipse.tycho</groupId>
         <artifactId>target-platform-configuration</artifactId>
