@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde version="3.6"?>
 
-<target name="indigo" sequenceNumber="9">
+<target name="indigo" sequenceNumber="10">
 <locations>
 <location includeAllPlatforms="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.platform.feature.group" version="3.7.1.r37x_v20110729-9gF7UHOxFtniV7mI3T556iZN9AU8bEZ1lHMcVK"/>
@@ -14,17 +14,15 @@
 <repository location="http://download.eclipse.org/eclipse/updates/3.7"/>
 </location>
 <location includeAllPlatforms="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
-<unit id="org.scala-ide.sdt.weaving.feature.feature.group" version="2.0.0.beta11-2_09-201110031011-3a97f5e"/>
-<unit id="org.scala-ide.sdt.feature.feature.group" version="2.0.0.beta11-2_09-201110031011-3a97f5e"/>
-<unit id="org.scala-ide.sdt.source.feature.feature.group" version="2.0.0.beta11-2_09-201110031011-3a97f5e"/>
-<repository location="http://download.scala-ide.org/releases/2.0.0-beta"/>
-</location>
-<location includeAllPlatforms="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.swtbot.forms.feature.group" version="2.0.5.20111003_1754-3676ac8-dev-e36"/>
 <unit id="org.eclipse.swtbot.eclipse.feature.group" version="2.0.5.20111003_1754-3676ac8-dev-e36"/>
 <unit id="org.eclipse.swtbot.feature.group" version="2.0.5.20111003_1754-3676ac8-dev-e36"/>
 <unit id="org.eclipse.swtbot.ide.feature.group" version="2.0.5.20111003_1754-3676ac8-dev-e36"/>
 <repository location="http://download.eclipse.org/technology/swtbot/helios/dev-build/update-site"/>
+</location>
+<location includeAllPlatforms="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
+<unit id="org.scala-ide.sdt.feature.feature.group" version="2.0.2.v-2_09-201207120929-81d0972"/>
+<repository location="http://download.scala-ide.org/releases-29/stable/site"/>
 </location>
 </locations>
 </target>
