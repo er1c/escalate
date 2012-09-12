@@ -51,6 +51,7 @@
         <configuration>
           <useUIHarness>true</useUIHarness>
           <useUIThread>true</useUIThread>
+          <argLine>${ui.test.vmargs}</argLine>
           <testSuite>${project.artifactId}</testSuite>
           <testClass>escalate.sdt.ui.TestSuite</testClass>
         </configuration>

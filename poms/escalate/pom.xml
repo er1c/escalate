@@ -190,6 +190,31 @@
       </plugins>
     </pluginManagement>
   </build>
+  <profiles>
+    <profile>
+      <id>macosx</id>
+      <activation>
+        <os>
+          <name>mac os x</name>
+          <family>mac</family>
+        </os>
+      </activation>
+      <properties>
+        <ui.test.vmargs>-Xmx512m -XX:MaxPermSize=256m -XstartOnFirstThread</ui.test.vmargs>
+      </properties>
+    </profile>
+    <profile>
+      <id>other-os</id>
+      <activation>
+        <os>
+          <family>!mac</family>
+        </os>
+      </activation>
+      <properties>
+        <ui.test.vmargs>-Xmx512m -XX:MaxPermSize=256m</ui.test.vmargs>
+      </properties>
+    </profile>
+  </profiles>
   <properties>
     <scala.version>2.9.0-1</scala.version>
     <tycho.version>0.12.0</tycho.version>
