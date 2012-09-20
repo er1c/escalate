@@ -50,6 +50,16 @@
       <timezone>+2</timezone>
     </developer>
   </developers>
+    <developers>
+    <developer>
+      <id>dghant1024</id>
+      <name>Dwayne Ghant</name>
+      <roles>
+        <role>developer</role>
+      </roles>
+      <timezone>-8</timezone>
+    </developer>
+  </developers>
   <pluginRepositories>
     <pluginRepository>
       <id>scala-tools.org</id>
