@@ -11,6 +11,7 @@
   <artifactId>escalate-commons</artifactId>
   <packaging>pom</packaging>
   <name>EScalate Commons</name>
+  <description>The parent project for the EScalate Commons feature and it's plug-ins.</description>
   <modules>
     <module>../../plugins/escalate.commons.core</module>
     <module>../../plugins/escalate.commons.ui</module>

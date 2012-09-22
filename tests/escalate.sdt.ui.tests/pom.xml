@@ -10,6 +10,7 @@
   </parent>
   <artifactId>escalate.sdt.ui.tests</artifactId>
   <name>EScalate SDT UI Tests</name>
+  <description>The Maven project for the EScalate SDT UI tests.</description>
   <packaging>eclipse-test-plugin</packaging>
   <dependencies>
     <dependency>

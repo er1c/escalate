@@ -11,6 +11,7 @@
   <artifactId>escalate-target</artifactId>
   <packaging>pom</packaging>
   <name>EScalate Target Platform Definition</name>
+  <description>The Maven project that contains the Target Platform Definition for EScalate.</description>
   <build>
     <plugins>
       <plugin>

@@ -10,7 +10,8 @@
   </parent>
   <artifactId>escalate-sdt</artifactId>
   <packaging>pom</packaging>
-  <name>EScalate SDT</name>
+  <name>EScalate Scalate Development Tools</name>
+  <description>The parent project for the EScalate SDT feature and it's plug-ins.</description>
   <modules>
     <module>../../plugins/escalate.sdt.core</module>
     <module>../../plugins/escalate.sdt.ui</module>

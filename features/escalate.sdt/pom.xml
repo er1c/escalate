@@ -10,6 +10,7 @@
   </parent>
   <artifactId>escalate.sdt</artifactId>
   <name>EScalate SDT Feature</name>
+  <description>The Maven project for the EScalate SDT Feature.</description>
   <packaging>eclipse-feature</packaging>
 </project>
 

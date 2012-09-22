@@ -10,6 +10,7 @@
   </parent>
   <artifactId>escalate.commons.ui</artifactId>
   <name>EScalate Commons UI Plug-in</name>
+  <description>The Maven project for the EScalate Commons UI Plug-in.</description>
   <packaging>eclipse-plugin</packaging>
   <build>
     <plugins>
