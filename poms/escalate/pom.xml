@@ -17,6 +17,7 @@
   </modules>
   <name>EScalate</name>
   <url>http://github.com/sdb/escalate</url>
+  <description>The main Maven project for EScalate.</description>
   <inceptionYear>2011</inceptionYear>
   <licenses>
     <license>

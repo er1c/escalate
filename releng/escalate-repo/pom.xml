@@ -11,6 +11,7 @@
   <artifactId>escalate-repo</artifactId>
   <name>EScalate Repository</name>
   <packaging>eclipse-repository</packaging>
+  <description>The Maven project that creates a p2 repository for EScalate.</description>
   <build>
     <plugins>
       <plugin>

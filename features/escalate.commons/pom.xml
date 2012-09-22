@@ -10,6 +10,7 @@
   </parent>
   <artifactId>escalate.commons</artifactId>
   <name>EScalate Commons Feature</name>
+  <description>The Maven project for the EScalate Commons Feature.</description>
   <packaging>eclipse-feature</packaging>
 </project>
 

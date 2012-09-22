@@ -10,6 +10,7 @@
   </parent>
   <artifactId>escalate.sdt.ui</artifactId>
   <name>EScalate SDT UI Plug-in</name>
+  <description>The Maven project for the EScalate SDT UI Plug-in.</description>
   <packaging>eclipse-plugin</packaging>
   <build>
     <plugins>
